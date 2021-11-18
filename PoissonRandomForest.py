@@ -1,4 +1,4 @@
-class PoissonDecisionTree():
+class PoissonRandomForest():
 
     def __init__(self):
         self
