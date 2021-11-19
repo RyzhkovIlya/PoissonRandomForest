@@ -26,8 +26,6 @@ class PoissonRandomForest():
             for ind, cnt in enumerate(poisson):
                 if cnt != 0:
                     new_df += it.repeat(ind, cnt)
-                else:
-                    continue
             df_poiss = df.loc[new_df,:]
             return df_poiss
 
