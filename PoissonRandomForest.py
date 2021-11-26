@@ -79,7 +79,7 @@ class PoissonRandomForest():
             return df_poiss
 
         # Connecting arrays to a DataFrame
-        X, Y = pd.DataFrame(X_train), pd.DataFrame(Y_train)
+        X, Y = pd.DataFrame(X_train), pd.DataFrame(Y_train).reset_index(drop=True)
         new_df = pd.concat([X,Y], axis=1)
 
         # The cycle of learning the DecisionTreeClassifire model and predicting the target variable of the test sample.
