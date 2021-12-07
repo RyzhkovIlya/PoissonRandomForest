@@ -1,11 +1,11 @@
 class PoissonRandomForest():
 
-    def __init__(self):
-        self
+    def __init__(self, n):
+        self.n = n
 
     from numpy.core.records import array
 
-    def PoissonRandomForestRegressor (self, X_train:array, Y_train:array, X_test:array, params:dict, n: int)->list:
+    def PoissonRandomForestRegressor (self, X_train:array, Y_train:array, X_test:array, params:dict)->list:
         """
         The function implements the Random Forest Regressor on a Poisson Bootstrap sample.
         """
@@ -35,7 +35,7 @@ class PoissonRandomForest():
 
         # The cycle of learning the DecisionTreeRegressor model and predicting the target variable of the test sample.
         best_models = []
-        for _ in range(1, n+1):
+        for _ in range(1, self.n+1):
             
             new_df_train = poiss(new_df)
             X, Y = new_df_train.iloc[:,:-1], new_df_train.iloc[:,-1]
@@ -49,10 +49,10 @@ class PoissonRandomForest():
         results = np.asarray(best_models).sum(axis=0)
 
         # We determine the average value for each index of the array.
-        fin_res = [j/n for j in results]
+        fin_res = [j/self.n for j in results]
         return fin_res
 
-    def PoissonRandomForestClassifier (self, X_train: array, Y_train: array, X_test: array, params: dict, n: int)->list:
+    def PoissonRandomForestClassifier (self, X_train: array, Y_train: array, X_test: array, params: dict)->list:
         """
         The function implements the Random Forest Classifire on a Poisson Bootstrap sample.
         """
@@ -84,7 +84,7 @@ class PoissonRandomForest():
 
         # The cycle of learning the DecisionTreeClassifire model and predicting the target variable of the test sample.
         best_models = []
-        for _ in range(1, n+1):
+        for _ in range(1, self.n+1):
 
             new_df_train = poiss(new_df)
             X, Y = new_df_train.iloc[:,:-1], new_df_train.iloc[:,-1]
